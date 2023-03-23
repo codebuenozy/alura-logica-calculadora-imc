@@ -1,0 +1,41 @@
+:root {
+--bg-color1:#eeaeca;
+--bg-color2:#94bbe9;
+--bg-transparent: #000000 opacity:1;
+--text: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    list-style-type: none;
+    text-decoration: none;
+    color: var(--text);
+    background: radial-gradient(circle, var(--bg-color1) 0%, var(--bg-color2) 100%);
+    opacity: 1;
+}
+
+.titulo__Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.titulo__Principal {
+    text-align: center;
+    background: var(--bg-transparent);
+    font-size: 3rem;
+    margin: 1.5rem;
+    padding: 1rem;
+}
+
+.btnCalculo {
+    text-align: center;
+    border-radius: 0.5rem;
+    margin: 1.5rem;
+    padding: 1rem;
+}
