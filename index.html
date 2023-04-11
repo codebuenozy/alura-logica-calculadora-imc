@@ -11,12 +11,24 @@
 
 <body>
 
-	<div class="titulo__Container">
-		<h1 class="titulo__Principal">Calculadora IMC</h1>
-		<button class="btnCalculo" type="button" onclick="fazCalculo()">Clique para Calcular</button>
-	</div>
+	<h1>Calculadora de IMC</h1>
+	<form id="form-imc">
+		<label for="nome">Nome:</label>
+		<input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+
+		<label for="altura">Altura (em metros):</label>
+		<input type="text" id="altura" name="altura" placeholder="Digite sua altura">
+
+		<label for="peso">Peso (em quilos):</label>
+		<input type="text" id="peso" name="peso" placeholder="Digite seu peso">
+
+		<input type="submit" value="Calcular">
+		<input type="reset" value="Limpar">
+	</form>
+	<div id="resultado"></div>
+
+	<script type="text/javascript" src="./assets/script/script.js"></script>
 
 </body>
-<script type="text/javascript" src="./assets/script/script.js"></script>
 
 </html>

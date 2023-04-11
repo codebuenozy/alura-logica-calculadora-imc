@@ -1,43 +1,53 @@
-var nomeInformado;
-var alturaInformada;
-var pesoInformado;
-var imcCalculado;
+// Captura o formulário
+var formIMC = document.getElementById("form-imc");
 
-function calculaImc(altura, peso) {
+// Captura os inputs
+var inputNome = document.getElementById("nome");
+var inputAltura = document.getElementById("altura");
+var inputPeso = document.getElementById("peso");
 
-    return peso / (altura * altura);
-}
+// Captura a div para exibir o resultado
+var divResultado = document.getElementById("resultado");
 
-function fazCalculo() {
+// Adiciona o evento de submit ao formulário
+formIMC.addEventListener("submit", function (event) {
+	event.preventDefault()
 
-    nomeInformado = prompt("Informe seu Nome:");
+	// Captura os valores dos inputs
+	var nome = inputNome.value.trim();
+	var altura = inputAltura.value.trim().replace(",", ".");
+	var peso = inputPeso.value.trim().replace(",", ".");
 
-    do {
-        const input = prompt("Informe sua altura (em metros):");
-        const alturaComPonto = input.replace(",", ".");
-        alturaInformada = parseFloat(alturaComPonto);
+	// Verifica se os valores são numéricos e maiores que zero
+	if (isNaN(altura) || isNaN(peso) || altura <= 0 || peso <= 0) {
+		divResultado.innerHTML = "Altura e peso devem ser números maiores que zero.";
+		return;
+	}
 
-        if (isNaN(alturaInformada)) {
-            alert(`"${input}" não é uma altura válida. Por favor, insira um valor numérico com ponto decimal.`);
-        }
-    } while (isNaN(alturaInformada));
+	// Calcula o IMC
+	var imc = peso / (altura * altura);
 
-    pesoInformado = prompt("Informe seu peso (em Kg):");
+	// Verifica a faixa de peso ideal
+	var faixaIdeal = "";
+	if (imc < 18.5) {
+		faixaIdeal = "Abaixo do peso";
+	} else if (imc >= 18.5 && imc <= 24.9) {
+		faixaIdeal = "Peso normal";
+	} else if (imc >= 25 && imc <= 29.9) {
+		faixaIdeal = "Sobrepeso";
+	} else if (imc >= 30 && imc <= 34.9) {
+		faixaIdeal = "Obesidade grau 1";
+	} else if (imc >= 35 && imc <= 39.9) {
+		faixaIdeal = "Obesidade grau 2";
+	} else {
+		faixaIdeal = "Obesidade grau 3";
+	}
 
-    imcCalculado = Math.round(calculaImc(alturaInformada, pesoInformado));
+	// Exibe o resultado
+	divResultado.innerHTML = nome + ", seu IMC é " + imc.toFixed(2) + " kg/m², o que significa que você está na faixa: " + faixaIdeal;
+});
 
-    function verificarPesoIdeal(imc) {
-        if (imc < 18.5) {
-            return " e você está abaixo do peso ideal";
-        } else if (imc >= 18.5 && imc < 25) {
-            return " e você está no peso ideal";
-        } else if (imc >= 25 && imc < 30) {
-            return " e você está com sobrepeso!";
-        } else {
-            return " e você está obeso! Cuide-se!!!";
-        }
-    }
-
-    alert("Olá " + nomeInformado + ", O seu IMC calculado é " + imcCalculado + verificarPesoIdeal(imcCalculado));
-
-}
+// Adiciona o evento de click ao botão Limpar
+formIMC.addEventListener("reset", function (event) {
+	divResultado.innerHTML = "";
+});
